@@ -132,10 +132,12 @@ function questionFormEdit(questionModel) {
     $firstRespondent.on('keypress', 'input', function(e) {
         if (e.which === 13) {
             var $additionalRespondent = additionalRespondent();
+            $firstRespondent.append($additionalRespondent);
+
             $additionalRespondent.find('#trashIcon').on('click', function() {
                 $additionalRespondent.remove();
             });
-            $firstRespondent.append($additionalRespondent);
+            $additionalRespondent.find('input').focus();
         }
     });
 

@@ -33,19 +33,21 @@ function questionForm(questionModel) {
     $firstRespondent.on('keypress', 'input', function(e) {
         if (e.which === 13) {
             var $additionalRespondent = additionalRespondent();
+            //append the additionalRespondent
+            $firstRespondent.append($additionalRespondent);
 
             //event handler for deleting a respondent
             $additionalRespondent.find('#trashIcon').on('click', function() {
                 var index = $firstRespondent.find('.row').index($additionalRespondent);
-                    //deleting the dom
+                //deleting the dom
                 $additionalRespondent.remove();
-                    //deleting the respondent data from questionModel
+                //deleting the respondent data from questionModel
                 questionModel.respondents.splice(index, 1);
             });
             $additionalRespondent.find('select').on('change', function() {
                 respondent.select = $(this).val();
             });
-            $additionalRespondent.find('input').on('change', function() {
+            $additionalRespondent.find('input').focus().on('change', function() {
                 respondent.input = $(this).val();
             });
 
@@ -55,9 +57,6 @@ function questionForm(questionModel) {
                 input: ''
             };
             questionModel.respondents.push(respondent);
-
-            //append the additionalRespondent
-            $firstRespondent.append($additionalRespondent);
         }
     });
 
